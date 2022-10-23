@@ -10,47 +10,57 @@ import UIKit
 class ViewController: UIViewController {
     
     let userTimer:Int = 1
-    var count = 0
+    var time: TimeInterval = 6000
+    var timer = Timer()
 
-    @IBOutlet var minitLabel:UILabel!
-    @IBOutlet var secoundLabel:UILabel!
+    @IBOutlet var timerLabel:UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        minitLabel = UILabel()
-        view.addSubview(minitLabel)
-
-        secoundLabel = UILabel()
-        view.addSubview(secoundLabel)
+        
+        
+        timerLabel.text = formatTime(time: time)
     }
     
     @IBAction func startTimer() {
-        count = userTimer * 60
+        if timer.isValid {
+            return
+        }
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] (timer) in
+            self.time -= 1
+            
+            self.timerLabel.text = formatTime(time: time)
         
-        let timer = Timer.scheduledTimer(timeInterval: 1.0,
-                                         target: self,
-                                         selector: #selector(self.timerAction(sender:)),
-                                         userInfo: nil,
-                                         repeats: true)
+            if self.time == 0 {
+                let alert: UIAlertController = UIAlertController(title: "終了", message: "お疲れ様でした。", preferredStyle: .alert)
+                
+                alert.addAction(
+                    UIAlertAction(
+                        title: "OK",
+                        style: .default,
+                        handler: { action in
+                            
+                        }
+                    )
+                )
+                self.present(alert, animated: true, completion: nil)
+                
+                timer.invalidate()
+            }
+        })
+        
         timer.fire()
     }
     
-    @objc func timerAction(sender:Timer){
-        if count >= 60 {
-            let minuteCount = count / 60
-            
-            minitLabel.text = String(minuteCount)
-            secoundLabel.text = "分"
-        }else if count < 60{
-            minitLabel.text = String(count)
-            secoundLabel.text = "秒"
-            if count == 0{
-                sender.invalidate()
-            }
+    func formatTime(time: TimeInterval) -> String {
+        let dateFormatter = DateComponentsFormatter()
+        dateFormatter.unitsStyle = .full
+        dateFormatter.allowedUnits = [.hour, .minute, .second]
+        
+        let timeString = dateFormatter.string(from: time)!
+        
+        return timeString
         }
-        count -= 1
-    }
-
 }
 

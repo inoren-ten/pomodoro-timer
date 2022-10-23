@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9EB253B12904EAD1002BE00B /* setupGitignore.command in Resources */ = {isa = PBXBuildFile; fileRef = 9EB253B02904EAD1002BE00B /* setupGitignore.command */; };
 		9EF8E3262904493B00F1729A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8E3252904493B00F1729A /* AppDelegate.swift */; };
 		9EF8E3282904493B00F1729A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8E3272904493B00F1729A /* SceneDelegate.swift */; };
 		9EF8E32A2904493B00F1729A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8E3292904493B00F1729A /* ViewController.swift */; };
@@ -17,7 +16,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9EB253B02904EAD1002BE00B /* setupGitignore.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = setupGitignore.command; path = ../../../../Downloads/setupGitignore.command; sourceTree = "<group>"; };
 		9EF8E3222904493B00F1729A /* pomodoro timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pomodoro timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EF8E3252904493B00F1729A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EF8E3272904493B00F1729A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 		9EF8E3242904493B00F1729A /* pomodoro timer */ = {
 			isa = PBXGroup;
 			children = (
-				9EB253B02904EAD1002BE00B /* setupGitignore.command */,
 				9EF8E3252904493B00F1729A /* AppDelegate.swift */,
 				9EF8E3272904493B00F1729A /* SceneDelegate.swift */,
 				9EF8E3292904493B00F1729A /* ViewController.swift */,
@@ -128,7 +125,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9EB253B12904EAD1002BE00B /* setupGitignore.command in Resources */,
 				9EF8E3322904494300F1729A /* LaunchScreen.storyboard in Resources */,
 				9EF8E32F2904494300F1729A /* Assets.xcassets in Resources */,
 				9EF8E32D2904493B00F1729A /* Main.storyboard in Resources */,
