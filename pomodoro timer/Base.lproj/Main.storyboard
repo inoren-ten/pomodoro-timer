@@ -37,11 +37,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhS-p6-3YS">
+                                <rect key="frame" x="123" y="351" width="168" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="nextTimeLabel" destination="qhS-p6-3YS" id="Web-Yh-7jR"/>
+                        <outlet property="startButton" destination="Mis-UT-spd" id="dlj-lf-LA7"/>
                         <outlet property="timerLabel" destination="MOo-32-mLD" id="iGd-fo-e3Y"/>
                     </connections>
                 </viewController>
