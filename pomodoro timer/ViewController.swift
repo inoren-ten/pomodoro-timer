@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     let userTimer:Int = 1
     var focusTimeInterval: TimeInterval = 5
     var restTimeInterval: TimeInterval = 2
-    var time: TimeInterval = 5
-    var time2: TimeInterval = 2
-    var timer = Timer()
-    var timer2 = Timer()
+    var focustime: TimeInterval = 5
+    var resttime: TimeInterval = 2
+    var focusTimer = Timer()
+    var restTimer = Timer()
     
     // 0. 何セット集中と休憩を繰り返したいかを管理する変数を用意する(数字, Int)
     let maxCount = 1
@@ -42,10 +42,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         
-        timerLabel.text = formatTime(time: time)
-        nextTimeLabel.text = "Next \(self.formatTime2(time2: time2))"
+        timerLabel.text = formatTime(time: focustime)
+        nextTimeLabel.text = "Next \(self.formatTime2(time2: resttime))"
         stopButton.isHidden = true
-        startButton.layer.cornerRadius = 25
+        startButton.layer.cornerRadius = 113
     }
     
     @IBAction func startTimer() {
@@ -56,11 +56,11 @@ class ViewController: UIViewController {
     @IBAction func stopTimer() {
         
         if state == "focus" {
-            timer.invalidate()
+            focusTimer.invalidate()
             stopButton.isHidden = true
             restartButton.isHidden = false
         }else if state == "rest" {
-            timer2.invalidate()
+            restTimer.invalidate()
             stopButton.isHidden = true
             restartButton.isHidden = false
         }
@@ -90,16 +90,16 @@ class ViewController: UIViewController {
     }
     
     func focusTime() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] (timer) in
-            self.time -= 1
+        focusTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] (timer) in
+            self.focustime -= 1
             
-            self.timerLabel.text = formatTime(time: time)
+            self.timerLabel.text = formatTime(time: focustime)
             state = "focus"
             
             startButton.isHidden = true
             stopButton.isHidden = false
             
-            if self.time == 0 {
+            if self.focustime == 0 {
                 let alert: UIAlertController = UIAlertController(title: "終了", message: "お疲れ様でした。", preferredStyle: .alert)
                 
                 alarmSoundPlayer.play()
@@ -125,18 +125,18 @@ class ViewController: UIViewController {
             }
         })
         
-        timer.fire()
+        focusTimer.fire()
     }
     
     func restTime() {
-        timer2 = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] (timer2) in
+        restTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] (timer2) in
             
-            self.time2 -= 1
-            timerLabel.text = self.formatTime2(time2: time2)
+            self.resttime -= 1
+            timerLabel.text = self.formatTime2(time2: resttime)
             
             state = "rest"
             
-            if self.time2 == 0 {
+            if self.resttime == 0 {
                 let alert2: UIAlertController = UIAlertController(title: "終了", message: "次のタスクを開始します。", preferredStyle: .alert)
                 
                 alarmSoundPlayer.play()
@@ -150,10 +150,10 @@ class ViewController: UIViewController {
                             alarmSoundPlayer.stop()
                             alarmSoundPlayer.currentTime = 0
                             
-                            time = focusTimeInterval
-                            time2 = restTimeInterval
-                            timerLabel.text = formatTime(time: time)
-                            nextTimeLabel.text = "Next \(self.formatTime2(time2: time2))"
+                            focustime = focusTimeInterval
+                            resttime = restTimeInterval
+                            timerLabel.text = formatTime(time: focustime)
+                            nextTimeLabel.text = "Next \(self.formatTime2(time2: resttime))"
                             
                             if currentCount < maxCount {
                                 currentCount += 1
@@ -167,11 +167,11 @@ class ViewController: UIViewController {
                 )
                 self.present(alert2, animated: true, completion: nil)
                 
-                timer.invalidate()
+                timer2.invalidate()
             }
         }
         )
-        timer2.fire()
+        restTimer.fire()
     }
     
     func formatTime2(time2: TimeInterval) -> String {
@@ -182,32 +182,6 @@ class ViewController: UIViewController {
         let timeString = dateFormatter.string(from: time2)!
         
         return timeString
-    }
-    
-    @objc func onUpdate(timer : Timer){
-        
-        // カウントの値1増加
-        time -= 1
-        
-        // 桁数を指定して文字列を作る
-        let str = formatTime(time: time)
-        
-        // ラベルに表示
-        timerLabel.text = str
-        
-    }
-    
-    @objc func onUpdate2(timer2 : Timer){
-        
-        // カウントの値1増加
-        time2 -= 1
-        
-        // 桁数を指定して文字列を作る
-        let str = formatTime2(time2: time2)
-        
-        // ラベルに表示
-        timerLabel.text = str
-        
     }
 }
 

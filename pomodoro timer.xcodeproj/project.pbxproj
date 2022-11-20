@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E312CB22917940A0059D1D9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E312CB12917940A0059D1D9 /* TimerViewController.swift */; };
 		9EF8E3262904493B00F1729A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8E3252904493B00F1729A /* AppDelegate.swift */; };
 		9EF8E3282904493B00F1729A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8E3272904493B00F1729A /* SceneDelegate.swift */; };
 		9EF8E32A2904493B00F1729A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8E3292904493B00F1729A /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E312CB12917940A0059D1D9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		9EF8E3222904493B00F1729A /* pomodoro timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pomodoro timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EF8E3252904493B00F1729A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EF8E3272904493B00F1729A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				9EF8E3252904493B00F1729A /* AppDelegate.swift */,
 				9EF8E3272904493B00F1729A /* SceneDelegate.swift */,
+				9E312CB12917940A0059D1D9 /* TimerViewController.swift */,
 				9EF8E3292904493B00F1729A /* ViewController.swift */,
 				9EF8E32B2904493B00F1729A /* Main.storyboard */,
 				9EF8E32E2904494300F1729A /* Assets.xcassets */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E312CB22917940A0059D1D9 /* TimerViewController.swift in Sources */,
 				9EF8E32A2904493B00F1729A /* ViewController.swift in Sources */,
 				9EF8E3262904493B00F1729A /* AppDelegate.swift in Sources */,
 				9EF8E3282904493B00F1729A /* SceneDelegate.swift in Sources */,
