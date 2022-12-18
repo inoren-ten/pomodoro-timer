@@ -6,18 +6,23 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    
-    
+    let realm = try! Realm()
     
     @IBOutlet weak var pickerLabel: UILabel!
     @IBOutlet var pickerView: UIPickerView!
-    @IBOutlet var start: UIButton!
+    @IBOutlet var startButton: UIButton!
     
-    var timer:Timer = Timer()
-    var count:Int = 0
+    //    var timer:Timer = Timer()
+    var count: Int = 0
+    var maxCount: Int = 1
+    
+    @IBOutlet var maxCountLabel: UILabel!
+    @IBOutlet var plusButton: UIButton!
+    @IBOutlet var minusButton: UIButton!
     
     let dataList = [[Int](0...24), [Int](0...60), [Int](0...60)]
     
@@ -25,6 +30,10 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         super.viewDidLoad()
         pickerView.dataSource = self
         pickerView.delegate = self
+        
+        startButton.layer.cornerRadius = 50
+        plusButton.layer.cornerRadius = 37.5
+        minusButton.layer.cornerRadius = 37.5
         
         //add to label "time"
         let hourLabel = UILabel()
@@ -47,6 +56,21 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         secondLabel.frame = CGRect(x: pickerView.bounds.width*3/4 - secondLabel.bounds.width/2, y: pickerView.bounds.height/2 - (secondLabel.bounds.height/2), width: secondLabel.bounds.width, height: secondLabel.bounds.height)
         pickerView.addSubview(secondLabel)
         // Do any additional setup after loading the view.
+        
+    }
+    
+    @IBAction func plusCount() {
+        maxCount = maxCount + 1
+        maxCountLabel.text = String(maxCount)
+    }
+    
+    @IBAction func minusCount() {
+        if maxCount == 0 {
+            return
+        } else {
+            maxCount = maxCount - 1
+            maxCountLabel.text = String(maxCount)
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -74,12 +98,43 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBAction func startCountButton(_ sender: Any) {
         count = dataList[0][pickerView.selectedRow(inComponent: 0)] * 60 * 60
-        + dataList[0][pickerView.selectedRow(inComponent: 1)] * 60
-        + dataList[0][pickerView.selectedRow(inComponent: 2)]
+        + dataList[1][pickerView.selectedRow(inComponent: 1)] * 60
+        + dataList[2][pickerView.selectedRow(inComponent: 2)]
         print (count)
+        
+        if count == 0 {
+            let alert: UIAlertController = UIAlertController(title: "Oops!", message: "時間を設定してください", preferredStyle: .alert)
+            alert.addAction(
+                UIAlertAction(
+                    title: "OK",
+                    style: .default,
+                    handler: { action in
+                    }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let recordCount = Record()
+            
+            recordCount.recordTime = maxCount * count
+            
+            try! realm.write {
+                realm.add(recordCount)
+            }
+            print(recordCount)
+            
+            performSegue(withIdentifier: "toTimer", sender: nil)
+        }
     }
     
-   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toTimer" {
+            let svc = segue.destination as? ViewController
+            svc?.focustime = TimeInterval(count)
+            let nextView = segue.destination as! ViewController
+            nextView.maxCount = Int(maxCountLabel.text!)!
+        }
+    }
+    
+    
     
     /*
      // MARK: - Navigation

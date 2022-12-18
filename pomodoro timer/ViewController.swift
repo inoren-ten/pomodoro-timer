@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     var restTimer = Timer()
     
     // 0. 何セット集中と休憩を繰り返したいかを管理する変数を用意する(数字, Int)
-    let maxCount = 1
+    var maxCount = 1
     
     // 1. 何回集中と休憩を繰り返したかの数を管理する変数を定義する(数字, Int)
     var currentCount = 1
@@ -31,7 +31,6 @@ class ViewController: UIViewController {
     
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet var nextTimeLabel: UILabel!
-    @IBOutlet var startButton: UIButton!
     @IBOutlet var stopButton: UIButton!
     @IBOutlet var restartButton: UIButton!
     
@@ -41,17 +40,22 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        
+        focusTimeInterval = focustime
+        resttime = focustime / 5
         timerLabel.text = formatTime(time: focustime)
         nextTimeLabel.text = "Next \(self.formatTime2(time2: resttime))"
         stopButton.isHidden = true
-        startButton.layer.cornerRadius = 113
+        
+        stopButton.layer.cornerRadius = 20
+        restartButton.layer.cornerRadius = 20
     }
     
-    @IBAction func startTimer() {
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("focustime", focustime)
         self.focusTime()
     }
+    
     
     @IBAction func stopTimer() {
         
@@ -96,15 +100,14 @@ class ViewController: UIViewController {
             self.timerLabel.text = formatTime(time: focustime)
             state = "focus"
             
-            startButton.isHidden = true
             stopButton.isHidden = false
             
-            if self.focustime == 0 {
-                let alert: UIAlertController = UIAlertController(title: "終了", message: "お疲れ様でした。", preferredStyle: .alert)
+            if self.focustime <= 0 {
+                let alertFocus: UIAlertController = UIAlertController(title: "終了", message: "お疲れ様でした。", preferredStyle: .alert)
                 
                 alarmSoundPlayer.play()
                 
-                alert.addAction(
+                alertFocus.addAction(
                     UIAlertAction(
                         title: "OK",
                         style: .default,
@@ -119,7 +122,7 @@ class ViewController: UIViewController {
                         }
                     )
                 )
-                self.present(alert, animated: true, completion: nil)
+                self.present(alertFocus, animated: true, completion: nil)
                 
                 timer.invalidate()
             }
@@ -136,12 +139,12 @@ class ViewController: UIViewController {
             
             state = "rest"
             
-            if self.resttime == 0 {
-                let alert2: UIAlertController = UIAlertController(title: "終了", message: "次のタスクを開始します。", preferredStyle: .alert)
+            if self.resttime <= 0 {
+                let alertRest: UIAlertController = UIAlertController(title: "終了", message: "次のタスクを開始します。", preferredStyle: .alert)
                 
                 alarmSoundPlayer.play()
                 
-                alert2.addAction(
+                alertRest.addAction(
                     UIAlertAction(
                         title: "OK",
                         style: .default,
@@ -159,13 +162,14 @@ class ViewController: UIViewController {
                                 currentCount += 1
                                 self.focusTime()
                             }else if currentCount == maxCount{
-                                startButton.isHidden = false
-                                stopButton.isHidden = true
+//                                startButton.isHidden = false
+//                                stopButton.isHidden = true
+                                self.dismiss(animated: true, completion: nil)
                             }
                         }
                     )
                 )
-                self.present(alert2, animated: true, completion: nil)
+                self.present(alertRest, animated: true, completion: nil)
                 
                 timer2.invalidate()
             }
