@@ -28,6 +28,8 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
         pickerView.dataSource = self
         pickerView.delegate = self
         
@@ -112,7 +114,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                     }))
             self.present(alert, animated: true, completion: nil)
         } else {
-            let recordCount = Record()
+            var recordCount = Record()
             
             recordCount.recordTime = maxCount * count
             
@@ -124,6 +126,8 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             performSegue(withIdentifier: "toTimer", sender: nil)
         }
     }
+    
+   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toTimer" {

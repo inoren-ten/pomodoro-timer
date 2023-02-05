@@ -134,44 +134,44 @@ class ViewController: UIViewController {
     func restTime() {
         restTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] (timer2) in
             
-            self.resttime -= 1
-            timerLabel.text = self.formatTime2(time2: resttime)
-            
-            state = "rest"
-            
-            if self.resttime <= 0 {
-                let alertRest: UIAlertController = UIAlertController(title: "終了", message: "次のタスクを開始します。", preferredStyle: .alert)
+            if currentCount < maxCount {
                 
-                alarmSoundPlayer.play()
+                currentCount += 1
                 
-                alertRest.addAction(
-                    UIAlertAction(
-                        title: "OK",
-                        style: .default,
-                        handler: { [self] action in
-                            
-                            alarmSoundPlayer.stop()
-                            alarmSoundPlayer.currentTime = 0
-                            
-                            focustime = focusTimeInterval
-                            resttime = restTimeInterval
-                            timerLabel.text = formatTime(time: focustime)
-                            nextTimeLabel.text = "Next \(self.formatTime2(time2: resttime))"
-                            
-                            if currentCount < maxCount {
-                                currentCount += 1
+                self.resttime -= 1
+                timerLabel.text = self.formatTime2(time2: resttime)
+                
+                state = "rest"
+                
+                if self.resttime <= 0 {
+                    let alertRest: UIAlertController = UIAlertController(title: "終了", message: "次のタスクを開始します。", preferredStyle: .alert)
+                    
+                    alarmSoundPlayer.play()
+                    
+                    alertRest.addAction(
+                        UIAlertAction(
+                            title: "OK",
+                            style: .default,
+                            handler: { [self] action in
+                                
+                                alarmSoundPlayer.stop()
+                                alarmSoundPlayer.currentTime = 0
+                                
+                                focustime = focusTimeInterval
+                                resttime = restTimeInterval
+                                timerLabel.text = formatTime(time: focustime)
+                                nextTimeLabel.text = "Next \(self.formatTime2(time2: resttime))"
+                                
                                 self.focusTime()
-                            }else if currentCount == maxCount{
-//                                startButton.isHidden = false
-//                                stopButton.isHidden = true
-                                self.dismiss(animated: true, completion: nil)
                             }
-                        }
+                        )
                     )
-                )
-                self.present(alertRest, animated: true, completion: nil)
-                
-                timer2.invalidate()
+                    self.present(alertRest, animated: true, completion: nil)
+                    
+                    timer2.invalidate()
+                }
+            } else if currentCount == maxCount {
+                self.dismiss(animated: true, completion: nil)
             }
         }
         )

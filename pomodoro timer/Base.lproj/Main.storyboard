@@ -73,7 +73,7 @@
             </objects>
             <point key="canvasLocation" x="-238" y="-504"/>
         </scene>
-        <!--Item 2-->
+        <!--学習時間-->
         <scene sceneID="aDW-I7-zPe">
             <objects>
                 <viewController id="fbg-ry-Uhf" customClass="RecordViewController" customModule="pomodoro_timer" customModuleProvider="target" sceneMemberID="viewController">
@@ -81,8 +81,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="合計時間" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9DT-1g-7aq">
-                                <rect key="frame" x="71" y="188" width="273" height="91"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="今日の合計時間" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9DT-1g-7aq">
+                                <rect key="frame" x="43" y="197" width="328" height="91"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
                                 <nil key="textColor"/>
@@ -95,11 +95,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMU-7l-OqM">
+                                <rect key="frame" x="113" y="97" width="188" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7Nl-UK-OR1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="DQk-oi-nkB"/>
+                    <tabBarItem key="tabBarItem" title="学習時間" image="clipboard.fill" catalog="system" id="DQk-oi-nkB"/>
+                    <connections>
+                        <outlet property="allCount" destination="srg-fm-Mji" id="0M1-Mm-nRs"/>
+                        <outlet property="dateLabel" destination="cMU-7l-OqM" id="tad-gw-D8E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZnR-cl-U6X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -123,7 +134,7 @@
             </objects>
             <point key="canvasLocation" x="-1998" y="-125"/>
         </scene>
-        <!--Item-->
+        <!--タイマー-->
         <scene sceneID="Vyf-VQ-ghv">
             <objects>
                 <viewController id="Wdm-Yt-7wN" customClass="TimerViewController" customModule="pomodoro_timer" customModuleProvider="target" sceneMemberID="viewController">
@@ -192,7 +203,7 @@
                         <viewLayoutGuide key="safeArea" id="Ha9-tB-LNQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="xB7-78-XlI"/>
+                    <tabBarItem key="tabBarItem" title="タイマー" image="timer" catalog="system" id="xB7-78-XlI"/>
                     <connections>
                         <outlet property="maxCountLabel" destination="Eon-YX-S7e" id="wSk-a7-uhL"/>
                         <outlet property="minusButton" destination="5fC-96-jvG" id="t75-cx-vfU"/>
@@ -209,6 +220,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="clipboard.fill" catalog="system" width="103" height="128"/>
+        <image name="timer" catalog="system" width="128" height="123"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
